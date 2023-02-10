@@ -5,9 +5,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
+   @Override
+   public String toString() {
+      return " ID "+id+" firstname "+firstName+" lastname "+lastName+" email "+email+car.toString();
+   }
 
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
 
    @Column(name = "name")
@@ -18,6 +22,17 @@ public class User {
 
    @Column(name = "email")
    private String email;
+   @OneToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name = "car_id")
+   public Car car;
+
+   public Car getCar() {
+      return car;
+   }
+
+   public void setCar(Car car) {
+      this.car = car;
+   }
 
    public User() {}
    
